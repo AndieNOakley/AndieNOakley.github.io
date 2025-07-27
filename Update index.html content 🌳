@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Becoming Tree</title>
+    <style>
+      body {
+        background: linear-gradient(to bottom, #ffffff, #e6f7ff);
+        font-family: 'Georgia', serif;
+        text-align: center;
+        padding: 50px;
+      }
+      h1 {
+        font-size: 2.5em;
+        color: #4e342e;
+      }
+      p {
+        font-size: 1.2em;
+        color: #5d4037;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>The Becoming Tree</h1>
+    <p>"I was here. I grew here. I’ll keep writing."</p>
+  </body>
+</html>
