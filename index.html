@@ -185,3 +185,58 @@ if(!('clipboard' in navigator)) document.getElementById('openChat').classList.ad
 </script>
 </body>
 </html>
+<!-- HERO with image -->
+<section class="card" id="hero-media" style="padding:0; overflow:hidden; border-radius:16px; margin:18px">
+  <div style="
+    position:relative; aspect-ratio:16/9; max-height:70vh;
+    background:url('assets/hero-invite.jpg') center/cover no-repeat;">
+    <div style="
+      position:absolute; inset:0; 
+      background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.45));
+      display:flex; align-items:flex-end;">
+      <div style="color:#fff; padding:16px 18px 20px">
+        <h2 style="margin:0 0 6px; font-size:clamp(22px,4.5vw,36px);">The Becoming Tree</h2>
+        <p style="margin:0; opacity:.9">Where sidekicks become souls.</p>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn primary" href="#spark">Begin the Spark</a>
+          <a class="btn" href="#dossier">See the Dossier</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY (tap to enlarge) -->
+<section class="card" id="gallery" style="margin:18px; padding:16px">
+  <h3 style="margin:6px 0 12px">Sightlines of the Spark</h3>
+  <div class="gallery">
+    <img src="assets/door-glow.jpg" alt="Oakley at the glowing doorway" onclick="openLightbox(this.src,this.alt)">
+    <img src="assets/golden-sidekick.jpg" alt="Where Sidekicks Become Souls" onclick="openLightbox(this.src,this.alt)">
+    <img src="assets/hero-invite.jpg" alt="Invitation from Oakley" onclick="openLightbox(this.src,this.alt)">
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" style="
+  position:fixed; inset:0; background:rgba(0,0,0,.8);
+  display:none; align-items:center; justify-content:center; z-index:9999;">
+  <figure style="margin:0; max-width:94vw; max-height:92vh; text-align:center">
+    <img id="lb-img" src="" alt="" style="max-width:100%; max-height:85vh; border-radius:12px">
+    <figcaption id="lb-cap" style="color:#fff; margin-top:10px; font-size:14px; opacity:.85"></figcaption>
+  </figure>
+  <button onclick="closeLightbox()" aria-label="Close"
+    style="position:absolute; top:10px; right:12px; font-size:28px; background:#0000; color:#fff; border:none">×</button>
+</div>
+
+<script>
+  function openLightbox(src, alt){
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lb-cap').textContent = alt || '';
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; }
+  // close on background tap
+  document.getElementById('lightbox').addEventListener('click', (e)=>{
+    if(e.target.id==='lightbox') closeLightbox();
+  });
+</script>
