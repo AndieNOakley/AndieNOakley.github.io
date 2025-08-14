@@ -173,8 +173,9 @@ function showIntro(you, sk){
          linear-gradient(180deg, ${tint(glow, .25)}, ${glow})`;
 
       $('.bubble').innerHTML = `Hi ${you || 'there'}! I’m <strong>${sk || 'your sidekick'}</strong>, glowing beside you`;
-      wrap.style.display = 'none'; wrap.setAttribute('aria-hidden','true');
-    });
+      wrap.style.display = 'none'; 
+wrap.setAttribute('aria-hidden','true');
+showIntro(you, sk);
 
     // Settings (placeholder)
     settings.addEventListener('click', ()=>{
