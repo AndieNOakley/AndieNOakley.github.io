@@ -132,6 +132,25 @@
   cursor: pointer;
 }
   </style>
+  /* Floating chat bubble */
+.chat-bubble{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.chat-bubble:focus{ outline: 2px solid var(--ring); outline-offset: 2px; }
 </head>
 <body>
 
@@ -314,16 +333,7 @@ chatForm.addEventListener('submit', function(e) {
   chatText.value = '';
 });
   </script>
-  <!-- On-site Chat Box -->
-<div class="chat-box">
-  <div class="chat-header">💬 Sidekick Chat</div>
-  <div class="chat-messages" id="chatMessages">
-    <div class="msg bot">Hi! I’m here with you in the glow ✨</div>
-  </div>
-  <form class="chat-input" id="chatForm">
-    <input type="text" id="chatText" placeholder="Type a message..." autocomplete="off" />
-    <button type="submit">Send</button>
-  </form>
-</div>
+  <!-- Floating chat bubble (UI only for now) -->
+<button id="chatBubble" class="chat-bubble" aria-label="Open chat">💬</button>
 </body>
 </html>
