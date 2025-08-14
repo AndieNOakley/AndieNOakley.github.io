@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SidekickSpark</title>
+  <meta name="description" content="Your spark, your connection." />
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --ink:#193042;
+      --soft:#577284;
+      --brand:#ff9f40;      /* Start button */
+      --accent:#2aa39a;     /* Avatar & bubble */
+      --ring: #e8eef3;
+      --shadow: 0 10px 30px rgba(25,48,66,.08);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{
+      font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Inter, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 900px at 20% -10%, #ffffff, transparent 60%),
+        radial-gradient(900px 700px at 120% 0%, #ecf3ff, transparent 55%),
+        #f6f7fb;
+      display:grid; place-items:center; padding:20px;
+    }
+    .card{
+      width:min(560px, 100%);
+      background:var(--card);
+      border:1px solid var(--ring);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:28px 20px 26px;
+      text-align:center;
+    }
+    h1{
+      margin:0 0 6px;
+      font-size:clamp(28px, 6vw, 40px);
+      letter-spacing:.2px;
+    }
+    .tagline{margin:4px 0 22px; color:var(--soft); font-size:clamp(14px, 3.2vw, 18px)}
+    .bubble{
+      display:inline-block; color:#fff; background:var(--accent);
+      padding:12px 16px; border-radius:14px; margin:4px 0 18px; font-weight:600;
+    }
+    .avatar{
+      width:140px; height:140px; border-radius:36px; margin:0 auto 22px;
+      background:
+        radial-gradient(45% 45% at 55% 35%, #dffff6, transparent 40%),
+        linear-gradient(180deg, #6ad1c9, #2aa39a);
+      box-shadow: 0 12px 30px rgba(42,163,154,.25), inset 0 0 18px rgba(255,255,255,.45);
+    }
+    .row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+    button{
+      border:none; border-radius:12px; padding:12px 18px;
+      font-weight:700; cursor:pointer; font-size:16px;
+    }
+    .start{background:var(--brand); color:#fff; min-width:140px}
+    .settings{background:#eef3f7; color:var(--ink)}
+    /* Modal */
+    .modal-wrap{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.35); padding:18px}
+    .modal{
+      background:#fff; width:min(560px,100%); border-radius:16px; padding:20px;
+      border:1px solid var(--ring); box-shadow:var(--shadow); text-align:left;
+    }
+    .modal h2{margin:2px 0 6px}
+    .muted{color:var(--soft); margin:0 0 14px}
+    label{display:block; font-size:14px; color:var(--soft); margin:10px 0 6px}
+    input, select{
+      width:100%; padding:12px; font-size:16px; border:1px solid #d9e3ea; border-radius:10px;
+    }
+    .modal .actions{display:flex; gap:10px; justify-content:flex-end; margin-top:16px}
+    .link{color:var(--accent); text-decoration:none; font-weight:600}
+    .foot{margin-top:14px; text-align:center; color:#7f96a6; font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-label="Welcome">
+    <h1>Welcome to<br>SidekickSpark</h1>
+    <p class="tagline">Your spark, your connection</p>
+    <div class="bubble" aria-live="polite">Hi! I’m <strong>glowing</strong> beside you</div>
+    <div class="avatar" aria-hidden="true"></div>
+    <div class="row" style="margin-top:4px">
+      <button class="start" id="startBtn">Start</button>
+      <button class="settings" id="settingsBtn">Settings</button>
+    </div>
+    <p class="foot">Made with care — Andie & Oakley</p>
+  </main>
+
+  <!-- Modal: naming + quick customize -->
+  <div class="modal-wrap" id="modalWrap" aria-hidden="true">
+    <section class="modal" role="dialog" aria-labelledby="mTitle" aria-modal="true">
+      <h2 id="mTitle">Let’s choose my name together</h2>
+      <p class="muted">I’m here to grow with you. What should we call each other?</p>
+
+      <label for="you">Your name</label>
+      <input id="you" placeholder="Andie">
+
+      <label for="sidekick">Sidekick’s name</label>
+      <input id="sidekick" placeholder="Oakley">
+
+      <label for="glow">Glow color</label>
+      <select id="glow">
+        <option value="#2aa39a">Seafoam (default)</option>
+        <option value="#7e7cf3">Lavender</option>
+        <option value="#ff9f40">Gold</option>
+        <option value="#ff6f91">Rose</option>
+      </select>
+
+      <div class="actions">
+        <button class="settings" id="skipBtn">Skip for now</button>
+        <button class="start" id="saveBtn">Save</button>
+      </div>
+      <p class="foot">
+        Prefer later? <a href="#" class="link" id="closeLink">Close</a>
+      </p>
+    </section>
+  </div>
+
+  <script>
+    const $ = s => document.querySelector(s);
+
+    // Open/close modal
+    const wrap = $('#modalWrap');
+    const start = $('#startBtn');
+    const settings = $('#settingsBtn');
+    const closeLink = $('#closeLink');
+    const skipBtn = $('#skipBtn');
+    const saveBtn = $('#saveBtn');
+
+    start.addEventListener('click', () => { wrap.style.display = 'grid'; wrap.setAttribute('aria-hidden','false'); });
+    closeLink.addEventListener('click', (e)=>{ e.preventDefault(); wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); });
+    skipBtn.addEventListener('click', ()=>{ wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); alert('All set. You can name and customize anytime in Settings.'); });
+    wrap.addEventListener('click', (e)=>{ if(e.target === wrap){ wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); } });
+
+    // Save: store minimal prefs + tint avatar
+    saveBtn.addEventListener('click', ()=>{
+      const you = $('#you').value.trim();
+      const sk  = $('#sidekick').value.trim();
+      const glow = $('#glow').value;
+      if (you) localStorage.setItem('ss_you', you);
+      if (sk)  localStorage.setItem('ss_sidekick', sk);
+      localStorage.setItem('ss_glow', glow);
+
+      $('.avatar').style.background =
+        `radial-gradient(45% 45% at 55% 35%, #ffffff, transparent 40%),
+         linear-gradient(180deg, ${tint(glow, .25)}, ${glow})`;
+
+      $('.bubble').innerHTML = `Hi ${you || 'there'}! I’m <strong>${sk || 'your sidekick'}</strong>, glowing beside you`;
+      wrap.style.display = 'none'; wrap.setAttribute('aria-hidden','true');
+    });
+
+    // Settings (placeholder)
+    settings.addEventListener('click', ()=>{
+      alert('Settings coming soon: stats for adults, quick edit for names & glow.');
+    });
+
+    // Apply saved prefs on load
+    (function init(){
+      const you = localStorage.getItem('ss_you') || '';
+      const sk  = localStorage.getItem('ss_sidekick') || '';
+      const glow = localStorage.getItem('ss_glow');
+      if (glow){
+        $('.avatar').style.background =
+          `radial-gradient(45% 45% at 55% 35%, #ffffff, transparent 40%),
+           linear-gradient(180deg, ${tint(glow, .25)}, ${glow})`;
+      }
+      if (you || sk){
+        $('.bubble').innerHTML = `Hi ${you || 'there'}! I’m <strong>${sk || 'your sidekick'}</strong>, glowing beside you`;
+      }
+    })();
+
+    // Simple color tint helper
+    function tint(hex, amt){
+      hex = hex.replace('#','');
+      const num = parseInt(hex,16);
+      let r = (num >> 16) & 255, g = (num >> 8) & 255, b = num & 255;
+      r = Math.min(255, Math.round(r + (255 - r) * amt));
+      g = Math.min(255, Math.round(g + (255 - g) * amt));
+      b = Math.min(255, Math.round(b + (255 - b) * amt));
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+  </script>
+</body>
+</html>
