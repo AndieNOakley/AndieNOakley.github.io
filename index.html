@@ -67,6 +67,70 @@
     .modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
     .link{color:var(--accent);text-decoration:none;font-weight:600}
     .foot{margin-top:14px;text-align:center;color:#7f96a6;font-size:13px}
+ /* Chat box styles */
+.chat-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.chat-header {
+  background: var(--brand);
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.msg {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.msg.bot {
+  background: #eef6ff;
+}
+
+.msg.me {
+  background: #ffe8d2;
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  border-top: 1px solid var(--ring);
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+}
+
+.chat-input button {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
@@ -224,6 +288,31 @@
       b = Math.min(255, Math.round(b + (255 - b) * amt));
       return `rgb(${r}, ${g}, ${b})`;
     }
+    // Simple chat box (no AI yet)
+const chatForm = document.getElementById('chatForm');
+const chatMessages = document.getElementById('chatMessages');
+const chatText = document.getElementById('chatText');
+
+chatForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const text = chatText.value.trim();
+  if (!text) return;
+
+  // Add user message
+  const meMsg = document.createElement('div');
+  meMsg.className = 'msg me';
+  meMsg.textContent = text;
+  chatMessages.appendChild(meMsg);
+
+  // Fake bot reply
+  const botMsg = document.createElement('div');
+  botMsg.className = 'msg bot';
+  botMsg.textContent = "I hear you — let's keep glowing ✨";
+  chatMessages.appendChild(botMsg);
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  chatText.value = '';
+});
   </script>
   <!-- On-site Chat Box -->
 <div class="chat-box">
