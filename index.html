@@ -78,6 +78,18 @@
     .foot{margin-top:14px; text-align:center; color:#7f96a6; font-size:13px}
   </style>
 </head>
+  <!-- Intro panel after saving -->
+<div class="modal-wrap" id="introWrap" aria-hidden="true">
+  <section class="modal" role="dialog" aria-labelledby="introTitle" aria-modal="true">
+    <h2 id="introTitle">All set 🌟</h2>
+    <p class="muted" id="introCopy">Nice to meet you — I’m your sidekick.</p>
+    <div class="actions" style="justify-content:space-between">
+      <button class="settings" id="customizeBtn">Customize avatar</button>
+      <a class="start" id="openChatBtn" href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-block;text-align:center">Open chat ↗</a>
+    </div>
+    <p class="foot"><a href="#" class="link" id="introClose">Not now</a></p>
+  </section>
+</div>
 <body>
   <main class="card" role="main" aria-label="Welcome">
     <h1>Welcome to<br>SidekickSpark</h1>
@@ -131,7 +143,17 @@
     const closeLink = $('#closeLink');
     const skipBtn = $('#skipBtn');
     const saveBtn = $('#saveBtn');
+const introWrap = $('#introWrap');
+const introCopy = $('#introCopy');
+$('#introClose').addEventListener('click', (e)=>{ e.preventDefault(); introWrap.style.display='none'; introWrap.setAttribute('aria-hidden','true'); });
+$('#customizeBtn').addEventListener('click', ()=> alert('Avatar builder coming soon ✨'));
 
+// After Save, show the intro
+function showIntro(you, sk){
+  introCopy.textContent = `Nice to meet you, I’m ${sk || 'your sidekick'}. I’ll glow beside you, ${you || 'friend'}.`;
+  introWrap.style.display = 'grid';
+  introWrap.setAttribute('aria-hidden','false');
+}
     start.addEventListener('click', () => { wrap.style.display = 'grid'; wrap.setAttribute('aria-hidden','false'); });
     closeLink.addEventListener('click', (e)=>{ e.preventDefault(); wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); });
     skipBtn.addEventListener('click', ()=>{ wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); alert('All set. You can name and customize anytime in Settings.'); });
