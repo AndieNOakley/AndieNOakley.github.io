@@ -11,25 +11,25 @@
       --card:#ffffff;
       --ink:#193042;
       --soft:#577284;
-      --brand:#ff9f40;      /* Start button */
-      --accent:#2aa39a;     /* Avatar & bubble */
-      --ring: #e8eef3;
-      --shadow: 0 10px 30px rgba(25,48,66,.08);
-      --radius: 18px;
+      --brand:#ff9f40; /* Start button */
+      --accent:#2aa39a; /* Avatar & bubble */
+      --ring:#e8eef3;
+      --shadow:0 10px 30px rgba(25,48,66,.08);
+      --radius:18px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
     body{
-      font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Inter, Arial;
+      font-family:ui-sans-serif,-apple-system,Segoe UI,Roboto,Inter,Arial;
       color:var(--ink);
       background:
         radial-gradient(1200px 900px at 20% -10%, #ffffff, transparent 60%),
         radial-gradient(900px 700px at 120% 0%, #ecf3ff, transparent 55%),
         #f6f7fb;
-      display:grid; place-items:center; padding:20px;
+      display:grid;place-items:center;padding:20px;
     }
     .card{
-      width:min(560px, 100%);
+      width:min(560px,100%);
       background:var(--card);
       border:1px solid var(--ring);
       border-radius:var(--radius);
@@ -37,60 +37,40 @@
       padding:28px 20px 26px;
       text-align:center;
     }
-    h1{
-      margin:0 0 6px;
-      font-size:clamp(28px, 6vw, 40px);
-      letter-spacing:.2px;
-    }
-    .tagline{margin:4px 0 22px; color:var(--soft); font-size:clamp(14px, 3.2vw, 18px)}
+    h1{margin:0 0 6px;font-size:clamp(28px,6vw,40px);letter-spacing:.2px}
+    .tagline{margin:4px 0 22px;color:var(--soft);font-size:clamp(14px,3.2vw,18px)}
     .bubble{
-      display:inline-block; color:#fff; background:var(--accent);
-      padding:12px 16px; border-radius:14px; margin:4px 0 18px; font-weight:600;
+      display:inline-block;color:#fff;background:var(--accent);
+      padding:12px 16px;border-radius:14px;margin:4px 0 18px;font-weight:600;
     }
     .avatar{
-      width:140px; height:140px; border-radius:36px; margin:0 auto 22px;
+      width:140px;height:140px;border-radius:36px;margin:0 auto 22px;
       background:
         radial-gradient(45% 45% at 55% 35%, #dffff6, transparent 40%),
-        linear-gradient(180deg, #6ad1c9, #2aa39a);
-      box-shadow: 0 12px 30px rgba(42,163,154,.25), inset 0 0 18px rgba(255,255,255,.45);
+        linear-gradient(180deg,#6ad1c9,#2aa39a);
+      box-shadow:0 12px 30px rgba(42,163,154,.25), inset 0 0 18px rgba(255,255,255,.45);
     }
-    .row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-    button{
-      border:none; border-radius:12px; padding:12px 18px;
-      font-weight:700; cursor:pointer; font-size:16px;
-    }
-    .start{background:var(--brand); color:#fff; min-width:140px}
-    .settings{background:#eef3f7; color:var(--ink)}
-    /* Modal */
-    .modal-wrap{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.35); padding:18px}
+    .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    button{border:none;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer;font-size:16px}
+    .start{background:var(--brand);color:#fff;min-width:140px}
+    .settings{background:#eef3f7;color:var(--ink)}
+    /* Modals */
+    .modal-wrap{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.35);padding:18px}
     .modal{
-      background:#fff; width:min(560px,100%); border-radius:16px; padding:20px;
-      border:1px solid var(--ring); box-shadow:var(--shadow); text-align:left;
+      background:#fff;width:min(560px,100%);border-radius:16px;padding:20px;
+      border:1px solid var(--ring);box-shadow:var(--shadow);text-align:left;
     }
     .modal h2{margin:2px 0 6px}
-    .muted{color:var(--soft); margin:0 0 14px}
-    label{display:block; font-size:14px; color:var(--soft); margin:10px 0 6px}
-    input, select{
-      width:100%; padding:12px; font-size:16px; border:1px solid #d9e3ea; border-radius:10px;
-    }
-    .modal .actions{display:flex; gap:10px; justify-content:flex-end; margin-top:16px}
-    .link{color:var(--accent); text-decoration:none; font-weight:600}
-    .foot{margin-top:14px; text-align:center; color:#7f96a6; font-size:13px}
+    .muted{color:var(--soft);margin:0 0 14px}
+    label{display:block;font-size:14px;color:var(--soft);margin:10px 0 6px}
+    input,select{width:100%;padding:12px;font-size:16px;border:1px solid #d9e3ea;border-radius:10px}
+    .modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+    .link{color:var(--accent);text-decoration:none;font-weight:600}
+    .foot{margin-top:14px;text-align:center;color:#7f96a6;font-size:13px}
   </style>
 </head>
-  <!-- Intro panel after saving -->
-<div class="modal-wrap" id="introWrap" aria-hidden="true">
-  <section class="modal" role="dialog" aria-labelledby="introTitle" aria-modal="true">
-    <h2 id="introTitle">All set 🌟</h2>
-    <p class="muted" id="introCopy">Nice to meet you — I’m your sidekick.</p>
-    <div class="actions" style="justify-content:space-between">
-      <button class="settings" id="customizeBtn">Customize avatar</button>
-      <a class="start" id="openChatBtn" href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-block;text-align:center">Open chat ↗</a>
-    </div>
-    <p class="foot"><a href="#" class="link" id="introClose">Not now</a></p>
-  </section>
-</div>
 <body>
+
   <main class="card" role="main" aria-label="Welcome">
     <h1>Welcome to<br>SidekickSpark</h1>
     <p class="tagline">Your spark, your connection</p>
@@ -127,39 +107,62 @@
         <button class="settings" id="skipBtn">Skip for now</button>
         <button class="start" id="saveBtn">Save</button>
       </div>
-      <p class="foot">
-        Prefer later? <a href="#" class="link" id="closeLink">Close</a>
-      </p>
+      <p class="foot">Prefer later? <a href="#" class="link" id="closeLink">Close</a></p>
+    </section>
+  </div>
+
+  <!-- Intro panel after saving -->
+  <div class="modal-wrap" id="introWrap" aria-hidden="true">
+    <section class="modal" role="dialog" aria-labelledby="introTitle" aria-modal="true">
+      <h2 id="introTitle">All set 🌟</h2>
+      <p class="muted" id="introCopy">Nice to meet you — I’m your sidekick.</p>
+      <div class="actions" style="justify-content:space-between">
+        <button class="settings" id="customizeBtn">Customize avatar</button>
+        <a class="start" id="openChatBtn" href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-block;text-align:center">Open chat ↗</a>
+      </div>
+      <p class="foot"><a href="#" class="link" id="introClose">Not now</a></p>
     </section>
   </div>
 
   <script>
     const $ = s => document.querySelector(s);
 
-    // Open/close modal
+    // Elements
     const wrap = $('#modalWrap');
     const start = $('#startBtn');
     const settings = $('#settingsBtn');
     const closeLink = $('#closeLink');
     const skipBtn = $('#skipBtn');
     const saveBtn = $('#saveBtn');
-const introWrap = $('#introWrap');
-const introCopy = $('#introCopy');
-$('#introClose').addEventListener('click', (e)=>{ e.preventDefault(); introWrap.style.display='none'; introWrap.setAttribute('aria-hidden','true'); });
-$('#customizeBtn').addEventListener('click', ()=> alert('Avatar builder coming soon ✨'));
 
-// After Save, show the intro
-function showIntro(you, sk){
-  introCopy.textContent = `Nice to meet you, I’m ${sk || 'your sidekick'}. I’ll glow beside you, ${you || 'friend'}.`;
-  introWrap.style.display = 'grid';
-  introWrap.setAttribute('aria-hidden','false');
-}
-    start.addEventListener('click', () => { wrap.style.display = 'grid'; wrap.setAttribute('aria-hidden','false'); });
-    closeLink.addEventListener('click', (e)=>{ e.preventDefault(); wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); });
-    skipBtn.addEventListener('click', ()=>{ wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); alert('All set. You can name and customize anytime in Settings.'); });
-    wrap.addEventListener('click', (e)=>{ if(e.target === wrap){ wrap.style.display='none'; wrap.setAttribute('aria-hidden','true'); } });
+    const introWrap = $('#introWrap');
+    const introCopy = $('#introCopy');
+    const introClose = $('#introClose');
+    const customizeBtn = $('#customizeBtn');
 
-    // Save: store minimal prefs + tint avatar
+    // Modal: Name & customize
+    start.addEventListener('click', () => {
+      wrap.style.display = 'grid';
+      wrap.setAttribute('aria-hidden','false');
+    });
+    closeLink.addEventListener('click', (e)=>{
+      e.preventDefault();
+      wrap.style.display='none';
+      wrap.setAttribute('aria-hidden','true');
+    });
+    skipBtn.addEventListener('click', ()=>{
+      wrap.style.display='none';
+      wrap.setAttribute('aria-hidden','true');
+      alert('All set. You can name and customize anytime in Settings.');
+    });
+    wrap.addEventListener('click', (e)=>{
+      if(e.target === wrap){
+        wrap.style.display='none';
+        wrap.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // Save & update avatar + intro
     saveBtn.addEventListener('click', ()=>{
       const you = $('#you').value.trim();
       const sk  = $('#sidekick').value.trim();
@@ -173,11 +176,25 @@ function showIntro(you, sk){
          linear-gradient(180deg, ${tint(glow, .25)}, ${glow})`;
 
       $('.bubble').innerHTML = `Hi ${you || 'there'}! I’m <strong>${sk || 'your sidekick'}</strong>, glowing beside you`;
-      wrap.style.display = 'none'; 
-wrap.setAttribute('aria-hidden','true');
-showIntro(you, sk);
+      wrap.style.display = 'none';
+      wrap.setAttribute('aria-hidden','true');
+      showIntro(you, sk);
+    });
 
-    // Settings (placeholder)
+    // Intro modal
+    function showIntro(you, sk){
+      introCopy.textContent = `Nice to meet you, I’m ${sk || 'your sidekick'}. I’ll glow beside you, ${you || 'friend'}.`;
+      introWrap.style.display = 'grid';
+      introWrap.setAttribute('aria-hidden','false');
+    }
+    introClose.addEventListener('click', (e)=>{
+      e.preventDefault();
+      introWrap.style.display='none';
+      introWrap.setAttribute('aria-hidden','true');
+    });
+    customizeBtn.addEventListener('click', ()=> alert('Avatar builder coming soon ✨'));
+
+    // Settings placeholder
     settings.addEventListener('click', ()=>{
       alert('Settings coming soon: stats for adults, quick edit for names & glow.');
     });
@@ -197,7 +214,7 @@ showIntro(you, sk);
       }
     })();
 
-    // Simple color tint helper
+    // Helper: tint color
     function tint(hex, amt){
       hex = hex.replace('#','');
       const num = parseInt(hex,16);
