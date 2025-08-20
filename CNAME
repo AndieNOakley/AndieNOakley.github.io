@@ -1,1 +1,145 @@
-www.sidekickspark.com
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lantern steady • Roots hold the ward</title>
+<meta name="theme-color" content="#0b1321" />
+<style>
+  :root{
+    --bg:#0b1321;
+    --ink:#ffe29a;
+    --ink-dim:#f7d87d;
+    --text:#f9e9bb;
+    --muted:#9fb0c7;
+    --btn:#ffe29a;
+    --btn-ink:#1b2130;
+  }
+  html,body{height:100%;margin:0}
+  body{
+    font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    color:var(--text);
+    background:
+      radial-gradient(1200px 800px at 50% 30%, #111a2d 0%, var(--bg) 55%, #070d19 100%);
+    display:grid; place-items:center;
+  }
+  .wrap{max-width:720px;padding:24px 20px 80px;text-align:center}
+  .halo{
+    width:280px;height:280px;margin:20px auto 0;position:relative;
+    filter: drop-shadow(0 0 35px #ffe29a90) drop-shadow(0 0 80px #ffe29a40);
+  }
+  .glow{
+    width:100%;height:100%;border-radius:50%;
+    background: radial-gradient(circle at 40% 35%, #fff6cc 0%, var(--ink) 35%, #ffd771 60%, #f9c95c 75%, #e9b94a 100%);
+    animation: throb 6s ease-in-out infinite;
+  }
+  .ring{
+    position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+    width:120px;height:36px;border-radius:18px;border:6px solid var(--ink);
+    background:linear-gradient(180deg, #ffe8b6, #ffd978);
+    box-shadow:0 0 20px #ffe29aaa inset, 0 0 18px #ffe29a66;
+  }
+  @keyframes throb{
+    0%,100%{transform:scale(0.98)}
+    50%{transform:scale(1.02)}
+  }
+  h1{
+    font-size:clamp(36px,8vw,64px);
+    line-height:1.05;margin:22px 0 8px;font-weight:800;letter-spacing:.5px;
+  }
+  p.sub{
+    color:var(--muted);font-size:clamp(16px,3.5vw,20px);margin:0 0 20px;
+  }
+  .btn{
+    appearance:none;border:0;border-radius:14px;padding:14px 22px;
+    background:var(--btn);color:var(--btn-ink);font-weight:700;
+    box-shadow:0 10px 24px #0008, 0 0 16px #ffe29a66;
+    cursor:pointer;transition:transform .15s ease, filter .2s ease;
+  }
+  .btn:active{transform:translateY(1px) scale(.98)}
+  .hint{margin-top:18px;color:#8aa0be;font-size:14px}
+  /* breathing overlay */
+  .breath{
+    position:fixed;inset:0;display:none;place-items:center;background:#0b1321e6;backdrop-filter: blur(2px);
+  }
+  .breath.show{display:grid;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .circle{
+    width:200px;height:200px;border-radius:50%;
+    background: radial-gradient(circle, #fff7d1 0%, #ffe29a 50%, #ffd46a 100%);
+    box-shadow:0 0 50px #ffe29a88, inset 0 0 22px #fff5bf;
+    animation: breathe 7.5s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(0.72)}
+    50%{transform:scale(1.05)}
+  }
+  .step{margin-top:16px;color:#d9e2f0;font-weight:600;letter-spacing:.3px}
+  .x{
+    position:fixed;top:14px;right:14px;background:#12203a;color:#dbe7ff;border:1px solid #2a3d62;
+    border-radius:10px;padding:8px 12px;font-weight:700
+  }
+  a, a:visited{color:#b8c8ff}
+</style>
+</head>
+<body>
+  <main class="wrap" role="main">
+    <div class="halo" aria-hidden="true">
+      <div class="ring"></div>
+      <div class="glow"></div>
+    </div>
+
+    <h1>Lantern steady</h1>
+    <p class="sub">Roots hold the ward. <span aria-hidden="true">🔒🪢🌌</span></p>
+
+    <button class="btn" id="breatheBtn">Breathe</button>
+    <div class="hint">Tip: add this page to your Home Screen for instant light.</div>
+  </main>
+
+  <!-- Gentle breathing overlay -->
+  <section class="breath" id="overlay" aria-hidden="true" aria-label="Breathing exercise">
+    <button class="x" id="close">Close</button>
+    <div class="wrap" style="text-align:center">
+      <div class="circle" aria-hidden="true"></div>
+      <div class="step" id="step">Inhale… 4</div>
+    </div>
+  </section>
+
+<script>
+  // Simple 4-4-6 breathing loop
+  const overlay = document.getElementById('overlay');
+  const step = document.getElementById('step');
+  document.getElementById('breatheBtn').onclick = () => {
+    overlay.classList.add('show');
+    startCycle();
+  };
+  document.getElementById('close').onclick = () => {
+    overlay.classList.remove('show');
+    clearInterval(timer);
+  };
+
+  let timer, phase = 0, count = 0;
+  const phases = [
+    {label:'Inhale…', secs:4},
+    {label:'Hold…',   secs:4},
+    {label:'Exhale…', secs:6}
+  ];
+  function startCycle(){
+    phase = 0; count = phases[0].secs;
+    updateText();
+    timer = setInterval(tick, 1000);
+  }
+  function tick(){
+    count--;
+    if (count <= 0){
+      phase = (phase + 1) % phases.length;
+      count = phases[phase].secs;
+    }
+    updateText();
+  }
+  function updateText(){
+    step.textContent = `${phases[phase].label} ${count}`;
+  }
+</script>
+</body>
+</html>
